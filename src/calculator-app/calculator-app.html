@@ -1,0 +1,70 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="calculator-app">
+  <template>
+    <style is="custom-style">
+       :host {
+        display: block;
+      }
+
+      paper-card{
+        padding: 10px;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+
+    <paper-card>
+      <div class="paper-content">
+        <paper-input id="resultpi" type="numeric" value="{{result}}"></paper-input>
+				<div class="layout horizontal center">
+					<paper-button raised>+</paper-button>
+					<paper-button raised>-</paper-button>
+					<paper-button raised>*</paper-button>
+					<paper-button raised>d</paper-button>
+				</div>
+				<div class="layout horizontal center">
+					<paper-button raised>0</paper-button>
+					<paper-button raised>1</paper-button>
+					<paper-button raised>2</paper-button>
+					<paper-button raised>3</paper-button>
+				</div>
+				<div class="layout horizontal center">
+					<paper-button raised>0</paper-button>
+					<paper-button raised>1</paper-button>
+					<paper-button raised>2</paper-button>
+					<paper-button raised>3</paper-button>
+				</div>
+				<div class="layout horizontal center">
+					<paper-button raised>0</paper-button>
+					<paper-button raised>1</paper-button>
+					<paper-button raised>2</paper-button>
+					<paper-button raised>3</paper-button>
+				</div>
+        <div class="layout end justified">
+          <paper-button raised class="layout self end">=</paper-button>
+        </div>
+      </div>
+    </paper-card>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'calculator-app',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'calculator-app',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
