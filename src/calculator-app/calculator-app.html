@@ -25,34 +25,33 @@
       }
 
     </style>
-    <h2>Hello [[prop1]]</h2>
-
     <paper-card>
       <div class="paper-content">
+        <div>{{opOne}} {{op}}</div>
         <paper-input id="resultPaperInput" value="{{result}}"></paper-input>
 				<div class="layout horizontal center" >
 					<paper-button raised>CE</paper-button>
-					<paper-button raised>C</paper-button>
+					<paper-button raised on-tap="resetResult">C</paper-button>
 					<paper-button raised on-tap="eraseResult"><==</paper-button>
-					<paper-button raised>/</paper-button>
+					<paper-button raised on-tap="selectOp" data-op="/">/</paper-button>
 				</div>
 				<div class="layout horizontal center">
 					<paper-button raised on-tap="tapNumber" data-val="7">7</paper-button>
 					<paper-button raised on-tap="tapNumber" data-val="8">8</paper-button>
 					<paper-button raised on-tap="tapNumber" data-val="9">9</paper-button>
-					<paper-button raised>*</paper-button>
+					<paper-button raised on-tap="selectOp" data-op="*">*</paper-button>
 				</div>
 				<div class="layout horizontal center">
 					<paper-button raised on-tap="tapNumber" data-val="4">4</paper-button>
 					<paper-button raised on-tap="tapNumber" data-val="5">5</paper-button>
 					<paper-button raised on-tap="tapNumber" data-val="6">6</paper-button>
-					<paper-button raised>-</paper-button>
+					<paper-button raised on-tap="selectOp" data-op="-">-</paper-button>
 				</div>
 				<div class="layout horizontal center">
 					<paper-button raised on-tap="tapNumber" data-val="1">1</paper-button>
 					<paper-button raised on-tap="tapNumber" data-val="2">2</paper-button>
 					<paper-button raised on-tap="tapNumber" data-val="3">3</paper-button>
-					<paper-button raised>+</paper-button>
+					<paper-button raised on-tap="selectOp" data-op="+">+</paper-button>
 				</div>
         <div class="layout horizontal center">
 					<paper-button raised>+-</paper-button>
@@ -75,7 +74,22 @@
           type: String,
           value: '0',
         },
+
+        op: {
+          type: String
+        },
+
+        opOne : {
+          type: String,
+          value: ''
+        },
+
+        op: {
+          type: String,
+          value: ''
+        }
       },
+
       tapNumber: function(e){
         const self = this;
 
@@ -93,6 +107,21 @@
         else {
           this.result = this.result.substring(0, this.result.length - 1);
         }
+      },
+
+      resetResult: function(){
+        this.result = '0';
+		this.op = '';
+		this.opOne = '';
+      },
+
+      selectOp: function(e){
+        this.opOne = this.result;
+        this.op = e.path[0].dataset.op;
+      },
+
+      calculateResult: function(){
+
       }
     });
   </script>
