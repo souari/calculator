@@ -4,50 +4,62 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
 <dom-module id="calculator-app">
   <template>
     <style is="custom-style">
-       :host {
+      :host {
         display: block;
       }
-
       paper-card{
         padding: 10px;
       }
+      #resultPaperInput {
+        text-align: right;
+        font-size: large;
+        font-weight: bold;
+      }
+      div {
+        margin: 10px;
+      }
+
     </style>
     <h2>Hello [[prop1]]</h2>
 
     <paper-card>
       <div class="paper-content">
-        <paper-input id="resultpi" type="numeric" value="{{result}}"></paper-input>
+        <paper-input id="resultPaperInput" value="{{result}}"></paper-input>
+				<div class="layout horizontal center" >
+					<paper-button raised>CE</paper-button>
+					<paper-button raised>C</paper-button>
+					<paper-button raised on-tap="eraseResult"><==</paper-button>
+					<paper-button raised>/</paper-button>
+				</div>
 				<div class="layout horizontal center">
-					<paper-button raised>+</paper-button>
-					<paper-button raised>-</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="7">7</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="8">8</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="9">9</paper-button>
 					<paper-button raised>*</paper-button>
-					<paper-button raised>d</paper-button>
 				</div>
 				<div class="layout horizontal center">
-					<paper-button raised>0</paper-button>
-					<paper-button raised>1</paper-button>
-					<paper-button raised>2</paper-button>
-					<paper-button raised>3</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="4">4</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="5">5</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="6">6</paper-button>
+					<paper-button raised>-</paper-button>
 				</div>
 				<div class="layout horizontal center">
-					<paper-button raised>0</paper-button>
-					<paper-button raised>1</paper-button>
-					<paper-button raised>2</paper-button>
-					<paper-button raised>3</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="1">1</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="2">2</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="3">3</paper-button>
+					<paper-button raised>+</paper-button>
 				</div>
-				<div class="layout horizontal center">
-					<paper-button raised>0</paper-button>
-					<paper-button raised>1</paper-button>
-					<paper-button raised>2</paper-button>
-					<paper-button raised>3</paper-button>
+        <div class="layout horizontal center">
+					<paper-button raised>+-</paper-button>
+					<paper-button raised on-tap="tapNumber" data-val="0">0</paper-button>
+					<paper-button raised>,</paper-button>
+					<paper-button raised>=</paper-button>
 				</div>
-        <div class="layout end justified">
-          <paper-button raised class="layout self end">=</paper-button>
-        </div>
       </div>
     </paper-card>
 
@@ -59,12 +71,29 @@
       is: 'calculator-app',
 
       properties: {
-        prop1: {
+        result: {
           type: String,
-          value: 'calculator-app',
+          value: '0',
         },
       },
+      tapNumber: function(e){
+        const self = this;
 
+        if(self.result === '0'){
+          self.result = '';
+        }
+
+        self.result += e.path[0].dataset.val;
+      },
+
+      eraseResult: function(){
+        if(this.result.length === 1){
+          this.result = '0';
+        }
+        else {
+          this.result = this.result.substring(0, this.result.length - 1);
+        }
+      }
     });
   </script>
 </dom-module>
